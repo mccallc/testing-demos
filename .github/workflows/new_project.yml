@@ -8,7 +8,6 @@ env:
   repo: ${{ github.repository }}
   org: ${{ github.repository_owner }}
   title: ${{ github.event.client_payload.title }}
-  body: ${{ github.event.client_payload.body }}
 
 jobs:
   create-project:
