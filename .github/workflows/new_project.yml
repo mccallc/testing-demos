@@ -8,6 +8,7 @@ env:
   repo: ${{ github.repository }}
   org: ${{ github.repository_owner }}
   title: ${{ github.event.client_payload.title }}
+  GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
 
 jobs:
   create-project:
@@ -19,9 +20,6 @@ jobs:
 
     - name: Set up GitHub CLI
       uses: ksivamuthu/actions-setup-gh-cli@v3
-
-    - name: Authenticate GitHub CLI
-      run: gh auth login --with-token < ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create GitHub project and issues
       run: |
