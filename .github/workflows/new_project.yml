@@ -26,7 +26,8 @@ jobs:
 
     - name: Create GitHub Project and Issues
       run: |
-        gh project create --owner "$org" --title "$title"
+        project_url=$(gh project create --owner "$org" --title "$title")
+        gh project link $(basename project_url)
         for file in issue_template/*.md; do
           issue_title="$title - ${file%.md}"
           gh issue -R "$repo" create --title "$issue_title" --body-file "$file" --project "$title"
