@@ -18,12 +18,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up GitHub CLI
-      uses: actions/setup-gh-cli@v1
+      uses: ksivamuthu/actions-setup-gh-cli
 
     - name: Authenticate GitHub CLI
       run: gh auth login --with-token < ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Create GitHub Project and Issues
+    - name: Create GitHub project and issues
       run: |
         project_url=$(gh project create --owner "$org" --title "$title")
         gh project link $(basename project_url)
