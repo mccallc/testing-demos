@@ -25,7 +25,8 @@ jobs:
       run: |
         project=$(gh project create --owner "$org" --title "$title" --format json --jq .number)
         # gh project link $project
+        # gh project link $project --owner "$org" --team "curation-and-recruitment"
         for file in issue_template/*.md; do
-          issue_title="$title - ${file%.md}"
+          issue_title="$title - $(basename ${file%.md} | tr '_' ' ' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')"
           gh issue -R "$repo" create --title "$issue_title" --body-file "$file" --project "$title"
         done
