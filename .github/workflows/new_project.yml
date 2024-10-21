@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up GitHub CLI
       uses: ksivamuthu/actions-setup-gh-cli@v3
@@ -24,7 +24,7 @@ jobs:
     - name: Create GitHub project and issues
       run: |
         project_url=$(gh project create --owner "$org" --title "$title")
-        gh project link $(basename $project_url)
+        gh project link $(basename "$project_url")
         for file in issue_template/*.md; do
           issue_title="$title - ${file%.md}"
           gh issue -R "$repo" create --title "$issue_title" --body-file "$file" --project "$title"
