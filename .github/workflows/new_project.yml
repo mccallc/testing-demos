@@ -8,6 +8,8 @@ env:
   repo: ${{ github.repository }}
   org: ${{ github.repository_owner }}
   title: ${{ github.event.client_payload.title }}
+  desc: ${{ github.event.client_payload.desc }}
+  readme: ${{ github.event.client_payload.readme }}
   GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
 
 jobs:
@@ -24,6 +26,7 @@ jobs:
     - name: Create GitHub project and issues
       run: |
         project=$(gh project create --owner "$org" --title "$title" --format json --jq .number)
+        gh project edit $project --description "$desc" --readme "$readme"
         # gh project link $project
         # gh project link $project --owner "$org" --team "curation-and-recruitment"
         for file in issue_template/*.md; do
