@@ -1,15 +1,27 @@
 name: Create New Project
 
 on:
-  repository_dispatch:
-    types: ["trigger-event"]
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Project title'
+        required: true
+        default: 'New Project'
+      desc:
+        description: 'Project description'
+        required: true
+        default: 'Description'
+      readme:
+        description: 'README content'
+        required: true
+        default: 'README content'
 
 env:
   repo: ${{ github.repository }}
   org: ${{ github.repository_owner }}
-  title: ${{ github.event.client_payload.title }}
-  desc: ${{ github.event.client_payload.desc }}
-  readme: ${{ github.event.client_payload.readme }}
+  title: ${{ github.event.inputs.title }}
+  desc: ${{ github.event.inputs.desc }}
+  readme: ${{ github.event.inputs.readme }}
   GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
 
 jobs:
